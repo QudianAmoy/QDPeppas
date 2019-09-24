@@ -1,0 +1,55 @@
+rootProject.name = 'RNDemo'
+include ':react-native-svg'
+project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
+include ':react-native-picker'
+project(':react-native-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-picker/android')
+include ':react-native-linear-gradient'
+project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+include ':react-native-image-crop-picker'
+project(':react-native-image-crop-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-crop-picker/android')
+include ':react-native-device-info'
+project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
+include ':react-native-cookies'
+project(':react-native-cookies').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cookies/android')
+include ':react-native-code-push'
+project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
+include ':react-native-autogrow-textinput'
+project(':react-native-autogrow-textinput').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-autogrow-textinput/android')
+include ':@remobile_react-native-toast'
+project(':@remobile_react-native-toast').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-toast/android')
+include ':@peppas_webview'
+project(':@peppas_webview').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/webview/android')
+include ':@peppas_ui'
+project(':@peppas_ui').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/ui/android')
+include ':@peppas_toolkit'
+project(':@peppas_toolkit').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/toolkit/android')
+include ':@peppas_image-preview'
+project(':@peppas_image-preview').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/image-preview/android')
+
+include ':app'
+include ':react-native-svg'
+project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')
+include ':react-native-picker'
+project(':react-native-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-picker/android')
+include ':react-native-linear-gradient'
+project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
+include ':react-native-image-crop-picker'
+project(':react-native-image-crop-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-crop-picker/android')
+include ':react-native-device-info'
+project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
+include ':react-native-cookies'
+project(':react-native-cookies').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cookies/android')
+include ':react-native-code-push'
+project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
+include ':react-native-autogrow-textinput'
+project(':react-native-autogrow-textinput').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-autogrow-textinput/android')
+include ':@remobile/react-native-toast'
+project(':@remobile/react-native-toast').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-toast/android')
+include ':@peppas/webview'
+project(':@peppas/webview').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/webview/android')
+include ':@peppas/ui'
+project(':@peppas/ui').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/ui/android')
+include ':@peppas/toolkit'
+project(':@peppas/toolkit').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/toolkit/android')
+include ':@peppas/image-preview'
+project(':@peppas/image-preview').projectDir = new File(rootProject.projectDir, '../node_modules/@peppas/image-preview/android')
