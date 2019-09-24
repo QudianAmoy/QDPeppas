@@ -1,8 +1,5 @@
 {
   "@peppas/image-preview": "git+ssh://git@git.qufenqi.com:peppas/image-preview.git#0.0.1",
-  "@peppas/location": "git+ssh://git@git.qufenqi.com:peppas/location.git#0.0.3",
-  "@peppas/react-native-face": "git+ssh://git@git.qufenqi.com:peppas/face.git#0.0.3",
-  "@peppas/react-native-social-manager": "git+ssh://git@git.qufenqi.com:peppas/social.git#0.0.6",
   "@peppas/toolkit": "git+ssh://git@git.qufenqi.com:peppas/toolkit.git#0.0.24",
   "@peppas/ui": "git+ssh://git@git.qufenqi.com:peppas/ui.git#0.0.13",
   "@peppas/webview": "git+ssh://git@git.qufenqi.com:peppas/webview.git#0.1.8",
