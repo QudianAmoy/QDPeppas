@@ -1,56 +1,40 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
  *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
+ * @author Jim.Xiao
  */
-
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import {Navigation} from 'react-native-navigation';
-import PageManager from './manager/PageManager'
-import {appconfig} from './config/AppConfig'
-setTimeout(() => {
-Navigation.setRoot({
-  root: {
-    bottomTabs: {
-      children: [{
-        stack: {
-          children: [{
-            component: {
-              name: 'example.FirstTabScreen',
-              passProps: {
-                text: 'This is tab 1'
-              }
-            }
-          }],
-          options: {
-            bottomTab: {
-              text: 'Tab 1',
-              
-              testID: 'FIRST_TAB_BAR_BUTTON'
-            }
-          }
+import CodePush from 'react-native-code-push';
+import { BackHandler } from 'react-native';
+import {PermissionManager,TabManager,PageManager,ReportManager} from './manager';
+import {RouterKey,RouterManager} from './manager/router'
+
+//APP初始化最早进入方法
+function onAppInit (){
+    //设置RNBugly上报监听
+    ReportManager.setReportRNError();
+    //自动注册页面
+    PageManager.autoRegisterPages();
+    //CodePush 更新通知
+    CodePush.sync({
+        installMode: CodePush.InstallMode.IMMEDIATE,
+    });
+    //权限判断
+    PermissionManager.checkPermission((result)=>{
+        if(result ==='1'){
+            RouterManager.runURIActionWithParams(RouterKey.ACTION_TO_SYSTEM_SETTING);
+        }else{
+            BackHandler.exitApp();
         }
-      },
-      {
-        component: {
-          name: 'example.secondTabScreen',
-          passProps: {
-            text: 'This is tab 2'
-          },
-          options: {
-            bottomTab: {
-              text: 'Tab 2',
-              
-              testID: 'SECOND_TAB_BAR_BUTTON'
-            }
-          }
-        }
-      }]
-    }
-  }
+    });
+}
+
+//APP 初始化
+onAppInit();
+
+//APP启动回调
+Navigation.events().registerAppLaunchedListener(() => {
+    TabManager.initTabBasedScreen();
 });
-}, 100);
+
+

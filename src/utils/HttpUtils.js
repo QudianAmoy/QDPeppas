@@ -70,8 +70,37 @@ function addParamsToUrl(url, obj) {
 
 }
 
+// Unicode编码
+function encodeUnicode(str) {
+    if(!str){
+        return "";
+    }
+    let res = [];
+    for ( var i=0; i<str.length; i++ ) {
+        res[i] = ( "00" + str.charCodeAt(i).toString(16) ).slice(-4);
+    }
+    return "\\u" + res.join("\\u");
+}
+
+// Unicode解码
+function decodeUnicode(str) {
+    if(!str){
+        return "";
+    }
+    str = str.replace(/\\/g, "%");
+    //转换中文
+    str = unescape(str);
+    //将其他受影响的转换回原来
+    str = str.replace(/%/g, "\\");
+    //对网址的链接进行处理
+    str = str.replace(/\\/g, "");
+    return str;
+}
+
 export default {
     combineParams,
     paramURI,
     addParamsToUrl,
+    encodeUnicode,
+    decodeUnicode,
 };

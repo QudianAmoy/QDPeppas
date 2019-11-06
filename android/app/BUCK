@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.rndemo",
+    package = "com.chunmian",
 )
 
 android_resource(
     name = "res",
-    package = "com.rndemo",
+    package = "com.chunmian",
     res = "src/main/res",
 )
 

@@ -3,7 +3,7 @@ import AppStatusManager from '../manager/AppStatusManager'
 import DeviceInfo from 'react-native-device-info';
 import {NativeModules, Platform} from 'react-native';
 import CommonUtil from '../utils/CommonUtil'
-
+import HttpUtils from '../utils/HttpUtils'
 
 /**
  * @author lining
@@ -48,11 +48,11 @@ export default async function ajax(url, {
 
     //统一接口参数
     header = Object.assign({
-        'Platform': Platform.OS == 'ios' ? 1 : 2,
+        'Platform': Platform.OS === 'ios' ? 1 : 2,
         'deviceId': DeviceInfo.getDeviceId(),
         'uniqueId': DeviceInfo.getUniqueID(),
         'version':DeviceInfo.getVersion(),        
-        'userAgent':DeviceInfo.getUserAgent(),
+        'userAgent':HttpUtils.encodeUnicode(DeviceInfo.getUserAgent()),
     }, header);
 
     showLog && console.log && console.log(JSON.stringify(err));

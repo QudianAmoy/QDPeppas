@@ -1,9 +1,5 @@
 /**
- * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
+ * 程序主入口
  */
-
-import {AppRegistry} from 'react-native';
 import App from './src/App';
-
 

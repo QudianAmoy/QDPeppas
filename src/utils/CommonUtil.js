@@ -4,43 +4,12 @@
  */
 
 /**
- * 判断Object是否为空
- * @param obj
- * @returns {boolean}
- */
-function isEmptyObject(obj) {
-    for (const key in obj) {
-        return false;
-    }
-    return true;
-}
-
-/**
- * 判断字符串是否为空
- *
- * @param {String} str
- * @returns {boolean}
- */
-function isEmptyString(str) {
-    return str === undefined || str === null || (typeof str == 'string' && str.length === 0);
-}
-
-/**
  * 判断两个Object是否相同
  * @param obj1
  * @param obj2
  */
 function cmp(obj1, obj2) {
     return JSON.stringify(obj1) === JSON.stringify(obj2);
-}
-
-/**
- * 判断list是否为空
- * @param list
- * @returns {boolean|*}
- */
-function isListEmpty(list) {
-    return list === undefined || list === null || (list && list.length === 0);
 }
 
 /**
@@ -151,11 +120,74 @@ function copyMap(map: Map) {
     return result;
 }
 
+/* 判断类型和判空 */
+
+// 返回类型字符串，转成小写
+function getType(obj) {
+    var type = Object.prototype.toString.call(obj).match(/^\[object (.*)\]$/)[1].toLowerCase();//返回各自类型，包括map，set
+    // if(type === 'string' && typeof obj === 'object') return 'object'; //如果字符串是new String()，返回object，这里可以讨论是否返回string
+    if (obj === null) return 'null';
+    if (obj === undefined) return 'undefined';
+    return type;
+}
+
+function isList(list) {
+    return getType(list) === 'array';
+}
+
+function isListEmpty(list) {
+    if (isList(list)) {
+        return list.length == 0;
+    }
+    return true;
+}
+
+function isListNotEmpty(list) {
+    return isList(list) && list.length > 0;
+}
+
+function isString(string) {
+    return getType(string) === 'string';
+}
+
+function isStringEmpty(string) {
+    if (isString(string)) {
+        return string.length == 0;
+    }
+    return true;
+}
+
+function isStringNotEmpty(string) {
+    return isString(string) && string.length > 0;
+}
+
+function isObject(obj) {
+    return getType(obj) === 'object';
+}
+
+function isObjectEmpty(obj) {
+    if (!isObject(obj)) {
+        return true;
+    }
+    for (const key in obj) {
+        return false;
+    }
+    return true;
+}
+
+function isObjectNotEmpty(obj) {
+    if (isObject(obj)) {
+        for (const key in obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/* 判断类型和判空 */
+
 export default {
-    isEmptyObject,
     cmp,
-    isListEmpty,
-    isEmptyString,
     isPositiveFee,
     boolValue,
     parseNumber,
@@ -164,4 +196,16 @@ export default {
     timeToTimestamp,
     getDateString,
     copyMap,
+
+    /* 类型处理 */
+    getType,
+    isList,
+    isListEmpty,
+    isListNotEmpty,
+    isString,
+    isStringEmpty,
+    isStringNotEmpty,
+    isObject,
+    isObjectEmpty,
+    isObjectNotEmpty,
 };

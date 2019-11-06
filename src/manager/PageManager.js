@@ -1,5 +1,15 @@
-import FirstPage from '../page/FirstPage';
+import * as Pages from '../page';
 import {Navigation} from 'react-native-navigation';
 
-Navigation.registerComponent('example.FirstTabScreen', () => FirstPage);
-Navigation.registerComponent('example.secondTabScreen', () => FirstPage);
+
+function autoRegisterPages() {
+    Object.keys(Pages).map(key => {
+        if (key && Pages[key].pageName){
+            Navigation.registerComponent(Pages[key].pageName, () => Pages[key]);
+        }
+    })
+}
+
+export default{
+    autoRegisterPages
+}
