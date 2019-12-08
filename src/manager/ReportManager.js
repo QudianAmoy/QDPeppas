@@ -10,7 +10,7 @@ function setReportRNError(){
                 const message = err.message ? err.message : '';
                 const stack = err.stack ? err.stack.split('\n') : '';
                 stack.splice(0, 0, message);
-                //TODO上报错误内容
+                // BuglyManager.reportRNError(message, stack);      //提交自己定义的原生报错上报SDK例如 bugly
                 Toast.showShortBottom('出错啦，请重启app后再进行尝试');
             }
         });
@@ -21,7 +21,7 @@ function setReportRNError(){
             } else {
                 const message = err.message ? err.message : '';
                 const stack = err.stack ? err.stack : '';
-                //TODO上报错误内容
+                // BuglyManager.reportRNError(message, stack);      //提交自己定义的原生报错上报SDK例如 bugly
                 Toast.showShortBottom('出错啦，请重启app后再进行尝试');
             }
         });

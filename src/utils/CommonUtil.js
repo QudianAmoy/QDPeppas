@@ -8,7 +8,7 @@
  * @param obj1
  * @param obj2
  */
-function cmp(obj1, obj2) {
+export function cmp(obj1, obj2) {
     return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
 
@@ -18,7 +18,7 @@ function cmp(obj1, obj2) {
  * @author mengweiping@qudian.com
  * @date 2018-07-09
  */
-function isPositiveFee(fee) {
+export function isPositiveFee(fee) {
     try {
         return Number(fee) > 0;
     } catch (error) {
@@ -35,7 +35,7 @@ function isPositiveFee(fee) {
  * @param {*} str
  * @returns
  */
-function parseNumber(str) {
+export function parseNumber(str) {
     try {
         return Number(str);
     } catch (error) {
@@ -48,7 +48,7 @@ function parseNumber(str) {
  * @param value
  * @returns {*}
  */
-function boolValue(value) {
+export function boolValue(value) {
     if (value === undefined || value === null) {
         return false;
     }
@@ -79,7 +79,7 @@ function boolValue(value) {
  * @param month
  * @returns {number}
  */
-function getCountDays(year, month) {
+export function getCountDays(year, month) {
     return new Date(year, month, 0).getDate();
 }
 
@@ -88,7 +88,7 @@ function getCountDays(year, month) {
  * @param timestamp
  * @returns {{year: number, month: number, day: number}}
  */
-function timestampToTime(timestamp) {
+export function timestampToTime(timestamp) {
     const date = new Date(timestamp);
     const Y = date.getFullYear();
     const M = date.getMonth() + 1;
@@ -100,7 +100,7 @@ function timestampToTime(timestamp) {
     }
 }
 
-function timeToTimestamp(year, month, day) {
+export function timeToTimestamp(year, month, day) {
     const M = month < 10 ? `0${month}` : month;
     const D = day < 10 ? `0${day}` : day;
     const timestamp = `${year}-${M}-${D}`;
@@ -108,13 +108,13 @@ function timeToTimestamp(year, month, day) {
     return date / 1000;
 }
 
-function getDateString(year, month, day) {
+export function getDateString(year, month, day) {
     const M = month < 10 ? `0${month}` : month;
     const D = day < 10 ? `0${day}` : day;
     return `${year}-${M}-${D}`;
 }
 
-function copyMap(map: Map) {
+export function copyMap(map: Map) {
     const result = new Map();
     map.forEach((value, key) => result.set(key, value));
     return result;
@@ -123,49 +123,42 @@ function copyMap(map: Map) {
 /* 判断类型和判空 */
 
 // 返回类型字符串，转成小写
-function getType(obj) {
-    var type = Object.prototype.toString.call(obj).match(/^\[object (.*)\]$/)[1].toLowerCase();//返回各自类型，包括map，set
+export function getType(obj) {
+    let type = Object.prototype.toString.call(obj).match(/^\[object (.*)\]$/)[1].toLowerCase();//返回各自类型，包括map，set
     // if(type === 'string' && typeof obj === 'object') return 'object'; //如果字符串是new String()，返回object，这里可以讨论是否返回string
     if (obj === null) return 'null';
     if (obj === undefined) return 'undefined';
     return type;
 }
 
-function isList(list) {
+export function isList(list) {
     return getType(list) === 'array';
 }
 
-function isListEmpty(list) {
-    if (isList(list)) {
-        return list.length == 0;
-    }
-    return true;
-}
-
-function isListNotEmpty(list) {
+export function isListNotEmpty(list) {
     return isList(list) && list.length > 0;
 }
 
-function isString(string) {
+export function isString(string) {
     return getType(string) === 'string';
 }
 
-function isStringEmpty(string) {
+export function isStringEmpty(string) {
     if (isString(string)) {
         return string.length == 0;
     }
     return true;
 }
 
-function isStringNotEmpty(string) {
+export function isStringNotEmpty(string) {
     return isString(string) && string.length > 0;
 }
 
-function isObject(obj) {
+export function isObject(obj) {
     return getType(obj) === 'object';
 }
 
-function isObjectEmpty(obj) {
+export function isEmptyObject(obj) {
     if (!isObject(obj)) {
         return true;
     }
@@ -175,7 +168,7 @@ function isObjectEmpty(obj) {
     return true;
 }
 
-function isObjectNotEmpty(obj) {
+export function isObjectNotEmpty(obj) {
     if (isObject(obj)) {
         for (const key in obj) {
             return true;
@@ -183,6 +176,16 @@ function isObjectNotEmpty(obj) {
     }
     return false;
 }
+
+/**
+ * 判断list是否为空
+ * @param list
+ * @returns {boolean|*}
+ */
+export function isListEmpty(list) {
+    return list === undefined || list === null || (list && list.length === 0);
+}
+
 
 /* 判断类型和判空 */
 
@@ -206,6 +209,7 @@ export default {
     isStringEmpty,
     isStringNotEmpty,
     isObject,
-    isObjectEmpty,
+    isEmptyObject,
     isObjectNotEmpty,
+
 };

@@ -1,14 +1,14 @@
 import Toast from '@remobile/react-native-toast';
-import AppStatusManager from '../manager/AppStatusManager'
 import DeviceInfo from 'react-native-device-info';
 import {NativeModules, Platform} from 'react-native';
 import CommonUtil from '../utils/CommonUtil'
 import HttpUtils from '../utils/HttpUtils'
+import AppConfig from "../config/AppConfig";
 
 /**
  * @author lining
  *
- * @export ajax
+ * @export doRequest
  * @param {*} url API 路由
  * @param {*} {
  *     params,
@@ -21,15 +21,15 @@ import HttpUtils from '../utils/HttpUtils'
  * }
  */
 
-export default async function ajax(url, {
+async function doRequest(url, {
     params,
     method = 'GET',
     header = {},
     success = () => {
     },
-    needLogin = () => {
-    },
     failure = () => {
+    },
+    needLogin = () => {
     },
     showLog = __DEV__,
     failToast = true
@@ -40,7 +40,9 @@ export default async function ajax(url, {
         // 拼接参数
         Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]));
         if (url.search(/\?/) === -1) {
-            url += '?' + paramsArray.join('&');
+            if(paramsArray.length !==0){
+                url += '?' + paramsArray.join('&');
+            }
         } else {
             url += '&' + paramsArray.join('&');
         }
@@ -48,17 +50,16 @@ export default async function ajax(url, {
 
     //统一接口参数
     header = Object.assign({
-        'Platform': Platform.OS === 'ios' ? 1 : 2,
-        'deviceId': DeviceInfo.getDeviceId(),
-        'uniqueId': DeviceInfo.getUniqueID(),
-        'version':DeviceInfo.getVersion(),        
-        'userAgent':HttpUtils.encodeUnicode(DeviceInfo.getUserAgent()),
+        'PLATFORM': Platform.OS === 'ios' ? 1 : 2,
+        'DEVICE-ID': DeviceInfo.getDeviceId(),
+        'LOCALE': 'zh',
+        'APP-VERSION':AppConfig.BaseConfig.appVersion,
+        'AUTH-TOKEN':'',
+        'USER-AGENT':HttpUtils.encodeUnicode(DeviceInfo.getUserAgent()),
     }, header);
-
-    showLog && console.log && console.log(JSON.stringify(err));
     configRequest(url, params, method, header, success, failure, needLogin, showLog, failToast);
 
-};
+}
 
 /**
  * @param {*} url    路由地址
@@ -78,8 +79,7 @@ function configRequest(url, params, method, header, success, failure, needLogin,
             'Content-Type': 'application/json',
         }, header),
         body: method === 'GET' ? null : JSON.stringify(params),
-    }
-
+    };
     fetch(url, request)
         .then(response => response.json())
         .then(responseJson => {
@@ -95,15 +95,8 @@ function configRequest(url, params, method, header, success, failure, needLogin,
 
             if (data && data.code === 401) {
                 // 登录状态失效
-                storage.remove({
-                    key: 'QxxAuthToken'
-                });
-                
-
-
                 typeof needLogin === 'function' && needLogin(data);
             }
-
 
             // 错误回调
             if (data === "" || data === undefined || data === null) {
@@ -125,4 +118,40 @@ function configRequest(url, params, method, header, success, failure, needLogin,
             failToast && Toast.showShortCenter('获取数据异常');
             typeof failure === 'function' && failure(error);
         });
+}
+
+function doGetRequest(url,
+    params,
+    success,
+    failure,
+){
+    return doRequest(url, {
+            params: params,
+            method: 'GET',
+            success: success,
+            failure: failure
+        }
+    )
+}
+
+function doPostRequest(url,
+                           params,
+                           success,
+                           failure,
+){
+    return doRequest(url, {
+            params: params,
+            method: 'POST',
+            success: success,
+            failure: failure
+        }
+    )
+}
+
+
+export default {
+    doRequest,
+    doGetRequest,
+    doPostRequest,
+
 }

@@ -5,7 +5,8 @@
 import {
     Platform,
 } from 'react-native';
-import {isListEmpty} from "../../utils/CommonUtil";
+import {isListEmpty} from '../../utils/CommonUtil';
+import * as Pages from '../../page';
 
 const curStack = [];
 const rootTabs = [];
@@ -107,7 +108,7 @@ function handleCommandCompleted(commandId, params) {
 function currentStack() {
     const pages = [];
     curStack.forEach((item, index) => {
-        const title = AllScreens[item.pageName];
+        const title = Pages[item.pageName];
         pages.push({pageName: item.pageName, title: title});
     });
     return pages;

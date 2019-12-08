@@ -25,8 +25,6 @@ export default class AppStatusManager {
         this.devicemodel = '';
         this.ipaddress = '';
         this.deviceid = '';
-        this.install_channel = '';     //获取渠道
-        this.channelfrom = '';
         this.Platform = Platform.OS === 'ios' ? 'app-ios' : 'app-android';//平台
 
         return new Promise((resolve, reject) => {

@@ -20,8 +20,6 @@ function configOptions(text, icon, selectIcon, id) {
 
 // Tab Config
 const HOME_OPTIONS = configOptions('首页', ImageKey.TAB_HOME_UP, ImageKey.TAB_HOME_Down, 'HOME_TAB_BAR_BUTTON');
-const FIRST_OPTIONS = configOptions('分类', ImageKey.TAB_CLASSIFICATION_UP, ImageKey.TAB_CLASSIFICATION_Down, 'TEST_TAB_BAR_BUTTON');
-const SHARE_OPTIONS = configOptions('分享', ImageKey.TAB_SHARE_UP, ImageKey.TAB_SHARE_Down, 'SHARE_TAB_BAR_BUTTON');
 const MY_OPTIONS = configOptions('我的', ImageKey.TAB_ME_UP, ImageKey.TAB_ME_Down, 'MINE_TAB_BAR_BUTTON')
 
 
@@ -92,11 +90,11 @@ function initTabBasedScreen() {
                     stack: {
                         children: [{
                             component: {
-                                name: Page.FirstPage.pageName,
+                                name: Page.HomePage.pageName,
                                 options: {
                                     topBar: {
                                         title: {
-                                            text: Page.FirstPage.title,
+                                            text: Page.HomePage.title,
                                         }
                                     }
                                 }
@@ -108,43 +106,11 @@ function initTabBasedScreen() {
                     stack: {
                         children: [{
                             component: {
-                                name: Page.SecondPage.pageName,
+                                name: Page.UserPage.pageName,
                                 options: {
                                     topBar: {
                                         title: {
-                                            text: Page.SecondPage.title,
-                                        }
-                                    }
-                                }
-                            }
-                        }],
-                        options: { bottomTab: FIRST_OPTIONS },
-                    }
-                }, {
-                    stack: {
-                        children: [{
-                            component: {
-                                name: Page.FirstPage.pageName,
-                                options: {
-                                    topBar: {
-                                        title: {
-                                            text: Page.FirstPage.title,
-                                        }
-                                    }
-                                }
-                            }
-                        }],
-                        options: { bottomTab: SHARE_OPTIONS },
-                    }
-                }, {
-                    stack: {
-                        children: [{
-                            component: {
-                                name: Page.SecondPage.pageName,
-                                options: {
-                                    topBar: {
-                                        title: {
-                                            text: Page.SecondPage.title,
+                                            text: Page.UserPage.title,
                                             color: '#fff'
                                         },
                                         background: {

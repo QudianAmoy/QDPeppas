@@ -4,7 +4,7 @@
  * @param {string} uri 参数
  *
  */
-import {isEmptyValue} from './CommonUtil';
+import {isEmptyObject} from './CommonUtil';
 function paramURI(uri) {
     let params = {};
     let indexParams = uri.indexOf('?')
@@ -28,18 +28,16 @@ function paramURI(uri) {
 function combineParams(uri, params) {
     let genParams = {};
     let urlParams = paramURI(uri);
-    if (urlParams) {
+    if (!isEmptyObject(urlParams)) {
         Object.keys(urlParams).forEach(function (key) {
-            if (!isEmptyValue(urlParams[key])) {
+            if (!isEmptyObject(urlParams[key])) {
                 genParams[key] = urlParams[key]
             }
         });
     }
-    if (params) {
+    if (!isEmptyObject(params)) {
         Object.keys(params).forEach(function (key) {
-            if (!isEmptyValue(params[key])) {
-                genParams[key] = params[key]
-            }
+            genParams[key] = params[key]
         });
     }
     return genParams
@@ -54,7 +52,7 @@ function addParamsToUrl(url, obj) {
     }
     let params = '';
     Object.keys(obj).forEach(function (key) {
-        if (!isEmptyValue(obj[key])) {
+        if (!isEmptyObject(obj[key])) {
             params += "&" + key + "=" + obj[key]
         }
     });

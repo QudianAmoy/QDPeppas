@@ -2,19 +2,14 @@ import RouterKey from './RouterConfig'
 import RouteFunction from './RouterFunction'
 import HttpUtils from '../../utils/HttpUtils'
 import RouterStack from "./RouterStack";
+import * as Pages from '../../page'
 ///保存当前路由
 let mNavigator = null;
 //设置当前路由
+
+
 function setCurrentNavigatior(navigator) {
     mNavigator = navigator;
-}
-
-function runURIAction(uri,
-    success = () => {
-    },
-    failure = () => {
-    }, ) {
-    runURIActionWithParams(uri, {}, success, failure);
 }
 
 /**
@@ -25,7 +20,7 @@ function runURIAction(uri,
  * @param {object} success 参数从params取参数
  * @param {object} failure 参数从params取参数
  */
-function runURIActionWithParams(uri,
+function runURIAction(uri,
     params = {},
     success = () => {
     },
@@ -40,19 +35,28 @@ function runURIActionWithParams(uri,
     let canAction = false;
 
     //openapp
-    if (uri.indexOf(RouterKey.ACTION_OPENAPP) === 0) {
+    if (uri.indexOf(RouterKey.ACTION_OPEN_APP) === 0) {
         let oriUrl = genParams.url;
 
         if (typeof (oriUrl) === 'undefined') {
             return;
         }
         let url = decodeURIComponent(oriUrl);
-        let subParams = HttpUtils.combineParams(uri, {});
-        if (subParams && params.channelFrom) {
-            // AppStatusManager.ShareInstance().channelfrom = params.channelFrom;
-        }
         runURIAction(url);
         return;
+    }
+
+    //跳转某个RN页面
+    if (uri.indexOf(RouterKey.ACTION_SCREEN) === 0) {
+        RouteFunction.pushScreen(mNavigator,genParams.pageName ,
+            genParams.title, { success, failure, ...genParams });
+        canAction = true;
+    }
+    //登录
+    if (uri.indexOf(RouterKey.ACTION_LOGIN) === 0) {
+        RouteFunction.pushScreen(mNavigator,Pages.LoginPage.pageName ,
+            Pages.LoginPage.title, { success, failure, ...genParams });
+        canAction = true;
     }
 
     //web 跳转
@@ -79,37 +83,10 @@ function runURIActionWithParams(uri,
         canAction = true;
     }
 
-    // 电话
-    if (uri.indexOf(RouterKey.ACTION_TEL_PHONE) === 0) {
-        RouteFunction.openPhone(uri);
-        canAction = true;
-    }
-
-    //跳转系统设置页面
     if (uri.indexOf(RouterKey.ACTION_TO_SYSTEM_SETTING) === 0) {
-        //TODO跳转设置页面
+        console.warn("function is not unSupport")
         canAction = true;
     }
-
-    // pop
-    if (uri.indexOf(RouterKey.Action_POP_TO_ROOT) === 0) {
-        RouteFunction.popToRootScreen(mNavigator, true, success);
-        canAction = true;
-    } else if (uri.indexOf(RouterKey.ACTION_POP_TO) === 0) {
-        const { pageName } = genParams;
-        const componentId = RouterStack.getComponentId(pageName);
-        RouteFunction.popToScreen(componentId, true, success);
-        canAction = true;
-    } else if (uri.indexOf(RouterKey.ACTION_POP) === 0) {
-        RouteFunction.popScreen(mNavigator, true, success);
-        canAction = true;
-    }
-
-    let mobpath = genParams.mobpath;
-    if (mobpath && mobpath !== 'undefine' && canAction) {
-        //埋点添加
-    }
-
     //其他协议
     if (canAction === false) {
         // Linking.openURL(uri);
@@ -145,10 +122,6 @@ function mergeOptions(params) {
     RouteFunction.mergeOptions(mNavigator, params);
 }
 
-/**
- *
- * @param {array} children exam [Screens.MY_SCREEN, Screens.CER_CENTER_SCREEN]
- */
 function setStackRootAction(children) {
     RouteFunction.setStackRoot(mNavigator, children);
 }
@@ -157,7 +130,6 @@ export default {
     runPushAction,
     runPushWithOptionsAction,
     runURIAction,
-    runURIActionWithParams,
     setCurrentNavigatior,
     runPopAction,
     runPopToAction,
