@@ -20,6 +20,7 @@ export default class ViewModel {
 
     @action
     onReFreshInfo = () => {
+        return;
         Get(API.GET_MENU_LIST,{
         },()=>{
 

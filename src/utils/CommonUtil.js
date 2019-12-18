@@ -30,7 +30,7 @@ export function isPositiveFee(fee) {
 /**
  *
  * 字符串转数值
- * @author mengweiping@qudian.com
+ * @author 
  * @date 2018-07-31
  * @param {*} str
  * @returns
@@ -42,6 +42,7 @@ export function parseNumber(str) {
         return 0;
     }
 }
+
 
 /**
  * bool判断
