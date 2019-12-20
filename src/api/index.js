@@ -1,2 +1,2 @@
 export Request from './Request';
-export UrlConstants from './api';
+export UrlConstants from './API';
