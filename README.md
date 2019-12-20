@@ -2,15 +2,13 @@
 
 ** 基于React Native的一键同时生成iOS/Android项目解决方案 **
 
-![]()
+![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/logo.png)
 
 ## 脚手架APP页面预览
 
-![]()
+![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/previews/1.jpg)
  
-![]()
-
-![]() 
+![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/previews/2.jpg)
 
 ## 生成语句
 
@@ -21,34 +19,34 @@
 ### Android 初始化配置方法(替换生成Demo包名)
 
 * 修改Android app.gradle的包名
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/Android/1-Android.png)
   
 * 修改代码包名
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/Android/2-Android.png)
   
 * 修改Manifest的包名
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/Android/3-Android.png)
   
 
 ### iOS 初始化配置方法(替换生成Demo包名)
 
 * 用Xcode打开项目，双击项目名改成新名字（重命名项目时，记得先备份好一份；重命名项目时，记得先备份好一份；重命名项目时，记得先备份好一份）
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/iOS/1-ios.png)
   
 * Rename项目名称
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/iOS/2-ios.png)
   
 * 打开应用所在文件夹，修改文件夹名字，所有QDTemplateDemo 改成 NewDemo，包含NewDemoTests.m文件
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/iOS/3-ios.png)
   
 * 选中 NewDemo.xcodeproj 右键打开 --> 显示包内容 --> 双击打开 project.pbxproj ，替换名字
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/iOS/4-ios.png)
   
 * 修改podfile的target，pod install，然后打开workspace
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/iOS/5-ios.png)
   
 * 修改Display Name
-  ![]()
+  ![](https://raw.githubusercontent.com/QudianAmoy/QDPeppas/develop/docs/iOS/6-ios.png)
   
 * manage schemes，修改
 
