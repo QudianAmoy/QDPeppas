@@ -19,7 +19,7 @@ import ContentWaterfall from "./list"
 export default class HomePage extends BasePage {
 
     static pageName = "HomePage";
-    static title = "新番速递";
+    static title = "首页";
 
     constructor(props) {
         super(props);
@@ -42,7 +42,7 @@ export default class HomePage extends BasePage {
         return (
             <View style={[styles.container]}>
                 <ContentWaterfall
-                    tabLabel="新番速递"
+                    tabLabel="首页"
                 />
             </View>
         );
