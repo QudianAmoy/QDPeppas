@@ -14,7 +14,7 @@
     "mobx-react": "^5.1.0",
     "react": "16.8.3",
     "react-native": "0.59.10",
-    "react-native-code-push": "^5.7.0",
+    "react-native-code-push": "^7.0.5",
     "react-native-cookies": "^3.3.0",
     "react-native-device-info": "^2.3.2",
     "react-native-navigation": "^2.28.0",
